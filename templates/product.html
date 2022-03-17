@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">{{ message }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+<br>
+
+<div>
+	{% if product.product_image %}
+
+		<img src="{{ url_for('static', filename='images/' + product.product_image)}}" width="200"
+                     align="right">
+
+            {% else %}
+
+		<img src="{{ url_for('static', filename='images/default_profile_pic.png')}}" width="150" align="right">
+
+	{% endif %}
+</div>
+
+
+<div class="shadow p-3 mb-5 bg-body rounded">
+	<h2>{{ product.product_name }}</h2>
+	<small>Price: {{ product.price }} $ <br/>
+	Description: {{ product.description|safe }}</small> <br/><br/>
+
+
+</div>
+
+	<a href="{{ url_for('products')}}" class="btn btn-outline-secondary btn-sm">Back to the store</a>
+
+{% if current_user.username == 'Ionut' %}
+
+	<a href="{{ url_for('edit_product',id=product.id)}}" class="btn btn-outline-secondary btn-sm">Edit Product</a>
+
+	<a href="{{ url_for('delete_product', id=product.id)}}" class="btn btn-outline-danger btn-sm">Delete Post</a>
+
+{% endif %}
+
+{% endblock %}

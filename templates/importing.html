@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">{{ message }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+
+{% if current_user.username == 'Ionut' %}
+
+<div class="shadow p-3 mb-5 bg-body rounded">
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        {{ form.product_name.label(class="form-label") }}
+        {{ form.product_name(class="form-control") }}
+        <br>
+        {{ form.price.label(class="form-label") }}
+        {{ form.price(class="form-control") }}
+        <br>
+        {{ form.description.label(class="form-label") }}
+        {{ form.description(class="form-control") }}
+        <br>
+        {{ form.product_image.label(class="form-label") }}
+        {{ form.product_image(class="form-control") }}
+        <br>
+
+        {{ form.submit(class="btn btn-secondary") }}
+
+    </form>
+</div>
+
+{% endif %}
+
+
+{% endblock %}

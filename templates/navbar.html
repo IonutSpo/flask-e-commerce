@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ url_for('index') }}">Home</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ url_for('products') }}">Store</a>
+        </li>
+
+        {% if current_user.username == 'Ionut' %}
+
+        <li class="nav-item">
+          <a class="nav-link active" style="color:green" aria-current="page" href="{{ url_for('importing') }}">Import</a>
+        </li>
+
+        {% endif %}
+
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-10">
+     <form method="POST" action="{{ url_for('search') }}" class="d-flex">Centered
+
+        {{ form.hidden_tag() }}
+
+        <input class="form-control me-2" style="padding:5px; width:500px; height:100%; background-color:white" type="search" placeholder="Search" aria-label="Search" name="searched">
+        <button class="btn btn-outline-secondary btn-sm" style="padding:5px" type="submit">Search</button>
+
+     </form>
+        </div>
+    </div>
+    <div class="row collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        {% if current_user.is_authenticated %}
+
+        <li class="nav-item">
+         <a class="nav-link active" aria-current="page" href="{{ url_for('dashboard') }}">Dashboard</a>
+        </li>
+
+        {% if current_user.username == 'Ionut' %}
+
+        <li class="nav-item">
+          <a class="nav-link active" style="color:red" aria-current="page" href="{{ url_for('admin') }}">Admin</a>
+        </li>
+
+        {% endif %}
+
+      <div class="col-6">
+
+        <li>
+          <a class="nav-link active" aria-current="page" href="{{ url_for('logout') }}">Logout</a>
+        </li>
+
+      </div>
+
+        {% else %}
+
+      <div class="col-3">
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ url_for('register') }}">Register</a>
+        </li>
+
+      </div>
+
+      <div class="col-2">
+
+        <li>
+          <a class="nav-link active" aria-current="page" href="{{ url_for('login') }}">Login</a>
+        </li>
+
+      </div>
+
+        {% endif %}
+
+      </ul>
+
+      </div>
+  </div>
+</nav>
